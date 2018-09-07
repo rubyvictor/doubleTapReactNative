@@ -39,21 +39,10 @@ export default class App extends Component {
     this.setState({ liked: !this.state.liked });
   };
 
-  lastTap = null;
-  handleDoubleTap = () => {
-    const now = Date.now();
-    const DOUBLE_TAP_DELAY = 300;
-    if (this.lastTap && now - this.lastTap < DOUBLE_TAP_DELAY) {
-      this.toggleLike();
-    } else {
-      this.lastTap = now;
-    }
-  };
-
   render() {
     return (
       <View style={styles.container}>
-        <DoubleTap onDoubleTap={this.handleDoubleTap}>
+        <DoubleTap onDoubleTap={this.toggleLike}>
           <Image
             source={{
               uri:
