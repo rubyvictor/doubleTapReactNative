@@ -5,6 +5,7 @@ import {
   View,
   Dimensions,
   Image,
+  TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native';
 
@@ -37,17 +38,30 @@ export default class App extends Component {
     this.setState({ liked: !this.state.liked });
   };
 
+  lastTap = null;
+  handleDoubleTap = () => {
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+    if (this.lastTap && now - this.lastTap < DOUBLE_TAP_DELAY) {
+      this.toggleLike();
+    } else {
+      this.lastTap = now;
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          source={{
-            uri:
-              'https://res.cloudinary.com/dw8sniwdq/image/upload/v1463415252/wovad2og8tlsuwxmxtbe.jpg'
-          }}
-          style={{ width: w.width, height: w.width }}
-          resizeMode="cover"
-        />
+        <TouchableWithoutFeedback onPress={this.handleDoubleTap}>
+          <Image
+            source={{
+              uri:
+                'https://res.cloudinary.com/dw8sniwdq/image/upload/v1463415252/wovad2og8tlsuwxmxtbe.jpg'
+            }}
+            style={{ width: w.width, height: w.width }}
+            resizeMode="cover"
+          />
+        </TouchableWithoutFeedback>
         <View style={styles.iconRow}>
           <TouchableOpacity onPress={this.toggleLike}>
             <Image
