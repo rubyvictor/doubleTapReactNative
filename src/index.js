@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native';
+import DoubleTap from './DoubleTap';
 
 const w = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={this.handleDoubleTap}>
+        <DoubleTap onDoubleTap={this.handleDoubleTap}>
           <Image
             source={{
               uri:
@@ -61,7 +62,7 @@ export default class App extends Component {
             style={{ width: w.width, height: w.width }}
             resizeMode="cover"
           />
-        </TouchableWithoutFeedback>
+        </DoubleTap>
         <View style={styles.iconRow}>
           <TouchableOpacity onPress={this.toggleLike}>
             <Image
